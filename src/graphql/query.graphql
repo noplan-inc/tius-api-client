@@ -1,0 +1,52 @@
+query erc721s($take: Int, $skip: Int) {
+    erc721s(take: $take, skip: $skip) {
+        id
+        chainId
+        address
+        name
+        lastBlockNumber
+        tokens {
+            tokenId
+            ownerAddress
+            metadata
+            tokenUri
+        }
+    }
+}
+
+query erc721ByContractAddress($address: String!) {
+    erc721ByContractAddress(contractAddress: $address) {
+        name
+        chainId
+        address
+        tokens {
+            tokenId
+            ownerAddress
+            metadata
+            tokenUri
+        }
+    }
+}
+
+query erc1155s($take: Int, $skip: Int) {
+    erc1155s(take: $take, skip: $skip) {
+        id
+        chainId
+        address
+        name
+        lastBlockNumber
+        tokens {
+            tokenId
+            ownerAddress
+            metadata
+            tokenUri
+        }
+    }
+}
+
+query blockchains {
+    blockchains {
+        id
+        name
+    }
+}

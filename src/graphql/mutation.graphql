@@ -1,0 +1,6 @@
+mutation createErc721($contractAddress: String!, $chainId: Int!) {
+    createErc721(contractAddress: $contractAddress, chainId: $chainId) {
+        name
+    }
+}
+

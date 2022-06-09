@@ -1,0 +1,106 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type ERC20 {
+  id: ID!
+  address: String!
+  name: String!
+  decimals: Int!
+  chain: BlockChain!
+  chainId: Int!
+}
+
+type BlockChainCount {
+  erc20s: Int!
+}
+
+type BlockChain {
+  id: ID!
+  name: String!
+  symbol: String!
+  erc20s: [ERC20!]
+  _count: BlockChainCount!
+}
+
+type ERC721Token {
+  id: BigInt!
+  tokenId: String!
+  tokenUri: String!
+  metadata: String!
+  ownerAddress: String!
+  erc721: ERC721!
+  erc721Id: Int!
+}
+
+scalar BigInt
+
+type ERC721Count {
+  tokens: Int!
+}
+
+type ERC721 {
+  id: ID!
+  address: String!
+  name: String!
+  chain: BlockChain!
+  chainId: Int!
+  tokens: [ERC721Token!]!
+  lastBlockNumber: Int!
+  _count: ERC721Count!
+}
+
+type ERC1155Count {
+  tokens: Int!
+}
+
+type ERC1155 {
+  id: ID!
+  address: String!
+  name: String!
+  chain: BlockChain!
+  chainId: Int!
+  tokens: [ERC1155Token!]!
+  lastBlockNumber: Int!
+  _count: ERC1155Count!
+}
+
+type ERC1155Token {
+  id: BigInt!
+  tokenId: String!
+  tokenUri: String!
+  metadata: String!
+  ownerAddress: String!
+  balance: String!
+  erc1155: ERC1155!
+  erc1155Id: Int!
+}
+
+type Query {
+  blockchains: [BlockChain!]!
+  blockchain(id: Int!): BlockChain
+  erc721s(skip: Int, take: Int): [ERC721!]!
+  erc721sByOwner(ownerAddress: String!, skip: Int, take: Int): [ERC721!]!
+  erc721ByContractAddress(contractAddress: String!): ERC721!
+  erc721SpecifiedTokens(contractAddress: String!, tokenIds: [String!]!, skip: Int, take: Int): [ERC721Token!]!
+  erc721AllToken(contractAddress: String!, skip: Int, take: Int): [ERC721Token!]!
+  erc1155(id: Int!): ERC1155!
+  erc1155s(skip: Int, take: Int): [ERC1155!]!
+  erc1155sByOwner(ownerAddress: String!, skip: Int, take: Int): [ERC1155!]!
+  erc1155SpecifiedTokens(contractAddress: String!, tokenIds: [String!]!, skip: Int, take: Int): [ERC1155Token!]!
+  erc1155AllToken(contractAddress: String!, skip: Int, take: Int): [ERC1155Token!]!
+}
+
+type Mutation {
+  createErc721(contractAddress: String!, chainId: Int!): ERC721!
+  updateEventErc721(id: Int!): String!
+  updateMetadataErc721(id: Int!): String!
+  createErc1155(createErc1155Input: CreateErc1155Input!): ERC1155!
+  updateEventErc1155(id: Int!): String!
+  updateMetadataErc1155(id: Int!): String!
+}
+
+input CreateErc1155Input {
+  contractAddress: String!
+  chainId: Int!
+}
